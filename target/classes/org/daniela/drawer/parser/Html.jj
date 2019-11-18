@@ -91,14 +91,20 @@ html html() :
   }
 }
 
-void head() :
-{}
+head head() :
+{
+  tamanio ta;
+  titulo ti;
+}
 {
   "<head"
   (
-    tamano()
+    ta = tamano()
   )?
-  ">" titulo() "</head>"
+  ">" ti = titulo() "</head>"
+  {
+    return new head(ta, ti);
+  }
 }
 
 titulo titulo() :

@@ -45,19 +45,26 @@ public class Html implements HtmlConstants {
 
   }
 
-  static final public void head() throws ParseException {
+  static final public head head() throws ParseException {
+    tamanio ta;
+    titulo ti;
     jj_consume_token(12);
     switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
     case 17:
-      tamano();
+      ta = tamano();
       break;
     default:
       jj_la1[0] = jj_gen;
       ;
     }
     jj_consume_token(13);
-    titulo();
+    ti = titulo();
     jj_consume_token(14);
+    {
+      if (true)
+        return new titulo(ident.image);
+    }
+    throw new Error("Missing return statement in function");
   }
 
   static final public titulo titulo() throws ParseException {
