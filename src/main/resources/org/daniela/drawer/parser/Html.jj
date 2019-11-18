@@ -1,0 +1,140 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */options{  static = true;}PARSER_BEGIN(Html)package eam.tlf.javacc.PRUEBA_JAVA_CC.grammars;
+
+public class Html{  public static void main(String args []) throws ParseException  {    Html parser = new Html(System.in);    while (true)    {      System.out.println("Reading from standard input...");      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");      try      {        switch (Html.one_line())        {          case 0 :           System.out.println("OK.");          break;          case 1 :           System.out.println("Goodbye.");          break;          default :           break;        }      }      catch (Exception e)      {        System.out.println("NOK.");        System.out.println(e.getMessage());        Html.ReInit(System.in);      }      catch (Error e)      {        System.out.println("Oops.");        System.out.println(e.getMessage());        break;      }    }  }}PARSER_END(Html)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN :
+{
+    < CONSTANT : (< DIGIT >)+ >
+  | < #DIGIT : [ "0"-"9" ] >
+  | < LETRA : (["a"-"z"] | ["A" - "Z"]) >
+  | < IDENTIFICADOR : (<LETRA>|<CONSTANT>)+>
+  | < EXTENSION : (< LETRA >|< CONSTANT >)+>
+}
+
+int html() :
+{}
+{
+"<html>" head() body() "</html>"
+}
+
+void head() :
+{}
+{
+  "<head" (tamano())? ">" titulo() "</head>"
+}
+
+void titulo() :
+{}
+{
+  "<title>" < IDENTIFICADOR > "</title>"
+}
+
+void tamano() :
+{}
+{
+  "width=\""< CONSTANT > "\", height=\""< CONSTANT > "\""
+}
+
+
+int body() :
+{}
+{
+  "<body>" (layout())* "</body>"
+}
+
+void layout() :
+{}
+{
+  "<layout rows=" < CONSTANT > " cols=" < CONSTANT > ">" (row()) "</layout>"
+}
+
+void row() :
+{}
+{
+  "<row>" (col())* "</row>"
+}
+
+void col() :
+{}
+{
+  "<col>" < LETRA > "</col>"
+}
+
+void image() :
+{}
+{
+  "<img " src() alt() ">"
+}
+
+void src() :
+{}
+{
+  "src=\"" url() "\""
+}
+
+void url() :
+{}
+{
+  (("."|".."|< IDENTIFICADOR >) ("/")?)+
+}
+
+void alt() :
+{}
+{
+  "alt=\"" < IDENTIFICADOR > "\""
+}
+
+
+void label() :
+{}
+{
+  "<label id=\"" <IDENTIFICADOR> "\" value=\"" <IDENTIFICADOR> "\" />"
+}
+
+
+void radiobutton() :
+{}
+{
+  "<radioGroup>" (radio())+ "</radioGroup>"
+}
+
+void radio() :
+{}
+{
+  "<input type=\"radio\" id=\""< IDENTIFICADOR >"\" name=\""< IDENTIFICADOR >"\">"< IDENTIFICADOR >"</input>"
+}
+
+void select() :
+{}
+{
+ "<select name = \"" < IDENTIFICADOR > "\">" (cuerpo())+ "</select>" 
+}
+
+void cuerpo() :
+{}
+{
+  "<option value = \"" < IDENTIFICADOR > "\">" < IDENTIFICADOR > "</option>"
+}
+
+void table() :
+{}
+{
+  "<table id=\"" <IDENTIFICADOR> "\">"(listaTR())*"</table>"
+}
+
+void listaTR():
+{}
+{
+  "<tr>"(listaTD())*"</tr>"
+}
+void listaTD():
+{}
+{
+  "<td>"< IDENTIFICADOR >"</td>"
+}
+
+void typeText() :
+{}
+{
+"<input type = \"text\" id =\"" < IDENTIFICADOR >"\" values = \"" < IDENTIFICADOR > "\"/>" 
+}
