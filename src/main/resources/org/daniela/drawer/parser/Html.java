@@ -2,35 +2,27 @@
 package org.caferrerb.drawer.parser;
 
 public class Html implements HtmlConstants {
-  public static void main(String args []) throws ParseException
-  {
+  public static void main(String args[]) throws ParseException {
     Html parser = new Html(System.in);
-    while (true)
-    {
+    while (true) {
       System.out.println("Reading from standard input...");
       System.out.print("Enter an expression like \u005c"1+(2+3)*4;\u005c" :");
-      try
-      {
-        switch (Html.html())
-        {
-          case 0 :
+      try {
+        switch (Html.html()) {
+        case 0:
           System.out.println("OK.");
           break;
-          case 1 :
+        case 1:
           System.out.println("Goodbye.");
           break;
-          default :
+        default:
           break;
         }
-      }
-      catch (Exception e)
-      {
+      } catch (Exception e) {
         System.out.println("NOK.");
         System.out.println(e.getMessage());
         Html.ReInit(System.in);
-      }
-      catch (Error e)
-      {
+      } catch (Error e) {
         System.out.println("Oops.");
         System.out.println(e.getMessage());
         break;
@@ -38,17 +30,24 @@ public class Html implements HtmlConstants {
     }
   }
 
-  static final public int html() throws ParseException {
+  static final public html html() throws ParseException {
+    head he;
+    body bo;
     jj_consume_token(10);
-    head();
-    body();
+    he = head();
+    bo = body();
     jj_consume_token(11);
-	return jj_ntk;
+    {
+      if (true)
+        return new titulo(ident.image);
+    }
+    throw new Error("Missing return statement in function");
+
   }
 
   static final public void head() throws ParseException {
     jj_consume_token(12);
-    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
     case 17:
       tamano();
       break;
@@ -61,10 +60,17 @@ public class Html implements HtmlConstants {
     jj_consume_token(14);
   }
 
-  static final public void titulo() throws ParseException {
+  static final public titulo titulo() throws ParseException {
+    Token ident;
     jj_consume_token(15);
-    jj_consume_token(IDENTIFICADOR);
+    ident = jj_consume_token(IDENTIFICADOR);
     jj_consume_token(16);
+    {
+      if (true)
+        return new titulo(ident.image);
+    }
+    throw new Error("Missing return statement in function");
+
   }
 
   static final public void tamano() throws ParseException {
@@ -77,9 +83,8 @@ public class Html implements HtmlConstants {
 
   static final public int body() throws ParseException {
     jj_consume_token(20);
-    label_1:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    label_1: while (true) {
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
       case 22:
         ;
         break;
@@ -90,7 +95,7 @@ public class Html implements HtmlConstants {
       layout();
     }
     jj_consume_token(21);
-	return jj_ntk;
+    return jj_ntk;
   }
 
   static final public void layout() throws ParseException {
@@ -105,9 +110,8 @@ public class Html implements HtmlConstants {
 
   static final public void row() throws ParseException {
     jj_consume_token(25);
-    label_2:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    label_2: while (true) {
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
       case 27:
         ;
         break;
@@ -140,9 +144,8 @@ public class Html implements HtmlConstants {
   }
 
   static final public void url() throws ParseException {
-    label_3:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    label_3: while (true) {
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
       case 31:
         jj_consume_token(31);
         break;
@@ -157,7 +160,7 @@ public class Html implements HtmlConstants {
         jj_consume_token(-1);
         throw new ParseException();
       }
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
       case 33:
         jj_consume_token(33);
         break;
@@ -165,7 +168,7 @@ public class Html implements HtmlConstants {
         jj_la1[4] = jj_gen;
         ;
       }
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
       case IDENTIFICADOR:
       case 31:
       case 32:
@@ -194,10 +197,9 @@ public class Html implements HtmlConstants {
 
   static final public void radiobutton() throws ParseException {
     jj_consume_token(38);
-    label_4:
-    while (true) {
+    label_4: while (true) {
       radio();
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
       case 40:
         ;
         break;
@@ -223,10 +225,9 @@ public class Html implements HtmlConstants {
     jj_consume_token(44);
     jj_consume_token(IDENTIFICADOR);
     jj_consume_token(42);
-    label_5:
-    while (true) {
+    label_5: while (true) {
       cuerpo();
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
       case 46:
         ;
         break;
@@ -250,9 +251,8 @@ public class Html implements HtmlConstants {
     jj_consume_token(48);
     jj_consume_token(IDENTIFICADOR);
     jj_consume_token(42);
-    label_6:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    label_6: while (true) {
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
       case 50:
         ;
         break;
@@ -267,9 +267,8 @@ public class Html implements HtmlConstants {
 
   static final public void listaTR() throws ParseException {
     jj_consume_token(50);
-    label_7:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    label_7: while (true) {
+      switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
       case 52:
         ;
         break;
@@ -310,20 +309,23 @@ public class Html implements HtmlConstants {
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
-      jj_la1_init_0();
-      jj_la1_init_1();
-   }
-   private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x20000,0x400000,0x8000000,0x80000100,0x0,0x80000100,0x0,0x0,0x0,0x0,};
-   }
-   private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x0,0x1,0x2,0x1,0x100,0x4000,0x40000,0x100000,};
-   }
+    jj_la1_init_0();
+    jj_la1_init_1();
+  }
+
+  private static void jj_la1_init_0() {
+    jj_la1_0 = new int[] { 0x20000, 0x400000, 0x8000000, 0x80000100, 0x0, 0x80000100, 0x0, 0x0, 0x0, 0x0, };
+  }
+
+  private static void jj_la1_init_1() {
+    jj_la1_1 = new int[] { 0x0, 0x0, 0x0, 0x1, 0x2, 0x1, 0x100, 0x4000, 0x40000, 0x100000, };
+  }
 
   /** Constructor with InputStream. */
   public Html(java.io.InputStream stream) {
-     this(stream, null);
+    this(stream, null);
   }
+
   /** Constructor with InputStream and supplied encoding */
   public Html(java.io.InputStream stream, String encoding) {
     if (jj_initialized_once) {
@@ -333,26 +335,37 @@ public class Html implements HtmlConstants {
       throw new Error();
     }
     jj_initialized_once = true;
-    try { jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
+    try {
+      jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1);
+    } catch (java.io.UnsupportedEncodingException e) {
+      throw new RuntimeException(e);
+    }
     token_source = new HtmlTokenManager(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 10; i++)
+      jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
   static public void ReInit(java.io.InputStream stream) {
-     ReInit(stream, null);
+    ReInit(stream, null);
   }
+
   /** Reinitialise. */
   static public void ReInit(java.io.InputStream stream, String encoding) {
-    try { jj_input_stream.ReInit(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
+    try {
+      jj_input_stream.ReInit(stream, encoding, 1, 1);
+    } catch (java.io.UnsupportedEncodingException e) {
+      throw new RuntimeException(e);
+    }
     token_source.ReInit(jj_input_stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 10; i++)
+      jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -369,7 +382,8 @@ public class Html implements HtmlConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 10; i++)
+      jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -379,7 +393,8 @@ public class Html implements HtmlConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 10; i++)
+      jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -395,7 +410,8 @@ public class Html implements HtmlConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 10; i++)
+      jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -404,13 +420,16 @@ public class Html implements HtmlConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 10; i++)
+      jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
     Token oldToken;
-    if ((oldToken = token).next != null) token = token.next;
-    else token = token.next = token_source.getNextToken();
+    if ((oldToken = token).next != null)
+      token = token.next;
+    else
+      token = token.next = token_source.getNextToken();
     jj_ntk = -1;
     if (token.kind == kind) {
       jj_gen++;
@@ -421,29 +440,32 @@ public class Html implements HtmlConstants {
     throw generateParseException();
   }
 
-
-/** Get the next Token. */
+  /** Get the next Token. */
   static final public Token getNextToken() {
-    if (token.next != null) token = token.next;
-    else token = token.next = token_source.getNextToken();
+    if (token.next != null)
+      token = token.next;
+    else
+      token = token.next = token_source.getNextToken();
     jj_ntk = -1;
     jj_gen++;
     return token;
   }
 
-/** Get the specific Token. */
+  /** Get the specific Token. */
   static final public Token getToken(int index) {
     Token t = token;
     for (int i = 0; i < index; i++) {
-      if (t.next != null) t = t.next;
-      else t = t.next = token_source.getNextToken();
+      if (t.next != null)
+        t = t.next;
+      else
+        t = t.next = token_source.getNextToken();
     }
     return t;
   }
 
   static private int jj_ntk() {
-    if ((jj_nt=token.next) == null)
-      return (jj_ntk = (token.next=token_source.getNextToken()).kind);
+    if ((jj_nt = token.next) == null)
+      return (jj_ntk = (token.next = token_source.getNextToken()).kind);
     else
       return (jj_ntk = jj_nt.kind);
   }
@@ -463,11 +485,11 @@ public class Html implements HtmlConstants {
     for (int i = 0; i < 10; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
-          if ((jj_la1_0[i] & (1<<j)) != 0) {
+          if ((jj_la1_0[i] & (1 << j)) != 0) {
             la1tokens[j] = true;
           }
-          if ((jj_la1_1[i] & (1<<j)) != 0) {
-            la1tokens[32+j] = true;
+          if ((jj_la1_1[i] & (1 << j)) != 0) {
+            la1tokens[32 + j] = true;
           }
         }
       }

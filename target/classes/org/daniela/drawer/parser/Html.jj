@@ -1,57 +1,151 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
- */options{  static = true;}PARSER_BEGIN(Html)package eam.tlf.javacc.PRUEBA_JAVA_CC.grammars;
-
-public class Html{  public static void main(String args []) throws ParseException  {    Html parser = new Html(System.in);    while (true)    {      System.out.println("Reading from standard input...");      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");      try      {        switch (Html.one_line())        {          case 0 :           System.out.println("OK.");          break;          case 1 :           System.out.println("Goodbye.");          break;          default :           break;        }      }      catch (Exception e)      {        System.out.println("NOK.");        System.out.println(e.getMessage());        Html.ReInit(System.in);      }      catch (Error e)      {        System.out.println("Oops.");        System.out.println(e.getMessage());        break;      }    }  }}PARSER_END(Html)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN :
+ */
+options
 {
-    < CONSTANT : (< DIGIT >)+ >
-  | < #DIGIT : [ "0"-"9" ] >
-  | < LETRA : (["a"-"z"] | ["A" - "Z"]) >
-  | < IDENTIFICADOR : (<LETRA>|<CONSTANT>)+>
-  | < EXTENSION : (< LETRA >|< CONSTANT >)+>
+  static = true;
 }
 
-int html() :
-{}
+PARSER_BEGIN(Html)
+package eam.tlf.javacc.PRUEBA_JAVA_CC.grammars;
+
+public class Html
 {
-"<html>" head() body() "</html>"
+  public static void main(String args []) throws ParseException
+  {
+    Html parser = new Html(System.in);
+    while (true)
+    {
+      System.out.println("Reading from standard input...");
+      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
+      try
+      {
+        switch (Html.one_line())
+        {
+          case 0 : 
+          System.out.println("OK.");
+          break;
+          case 1 : 
+          System.out.println("Goodbye.");
+          break;
+          default : 
+          break;
+        }
+      }
+      catch (Exception e)
+      {
+        System.out.println("NOK.");
+        System.out.println(e.getMessage());
+        Html.ReInit(System.in);
+      }
+      catch (Error e)
+      {
+        System.out.println("Oops.");
+        System.out.println(e.getMessage());
+        break;
+      }
+    }
+  }
+}
+
+PARSER_END(Html)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN :
+{
+  < CONSTANT : (< DIGIT >)+ >
+| < #DIGIT : [ "0"-"9" ] >
+| < LETRA :
+    (
+      [ "a"-"z" ]
+    | [ "A"-"Z" ]
+    ) >
+| < IDENTIFICADOR :
+    (
+      < LETRA >
+    | < CONSTANT >
+    )+ >
+| < EXTENSION :
+    (
+      < LETRA >
+    | < CONSTANT >
+    )+ >
+}
+
+html html() :
+{
+  head he;
+  body bo;
+}
+{
+  "<html>" he = head() bo = body() "</html>"
+  {
+    return new html(he, bo);
+  }
 }
 
 void head() :
 {}
 {
-  "<head" (tamano())? ">" titulo() "</head>"
+  "<head"
+  (
+    tamano()
+  )?
+  ">" titulo() "</head>"
 }
 
-void titulo() :
-{}
+titulo titulo() :
 {
-  "<title>" < IDENTIFICADOR > "</title>"
+  Token ident;
+}
+{
+  "<title>" ident = < IDENTIFICADOR > "</title>"
+  {
+    return new titulo(ident.image);
+  }
 }
 
 void tamano() :
 {}
 {
-  "width=\""< CONSTANT > "\", height=\""< CONSTANT > "\""
+  "width=\"" < CONSTANT > "\", height=\"" < CONSTANT > "\""
 }
-
 
 int body() :
 {}
 {
-  "<body>" (layout())* "</body>"
+  "<body>"
+  (
+    layout()
+  )*
+  "</body>"
 }
 
 void layout() :
 {}
 {
-  "<layout rows=" < CONSTANT > " cols=" < CONSTANT > ">" (row()) "</layout>"
+  "<layout rows=" < CONSTANT > " cols=" < CONSTANT > ">"
+  (
+    row()
+  )
+  "</layout>"
 }
 
 void row() :
 {}
 {
-  "<row>" (col())* "</row>"
+  "<row>"
+  (
+    col()
+  )*
+  "</row>"
 }
 
 void col() :
@@ -75,7 +169,14 @@ void src() :
 void url() :
 {}
 {
-  (("."|".."|< IDENTIFICADOR >) ("/")?)+
+  (
+    (
+      "."
+    | ".."
+    | < IDENTIFICADOR >
+    )
+    ("/")?
+  )+
 }
 
 void alt() :
@@ -84,30 +185,36 @@ void alt() :
   "alt=\"" < IDENTIFICADOR > "\""
 }
 
-
 void label() :
 {}
 {
-  "<label id=\"" <IDENTIFICADOR> "\" value=\"" <IDENTIFICADOR> "\" />"
+  "<label id=\"" < IDENTIFICADOR > "\" value=\"" < IDENTIFICADOR > "\" />"
 }
-
 
 void radiobutton() :
 {}
 {
-  "<radioGroup>" (radio())+ "</radioGroup>"
+  "<radioGroup>"
+  (
+    radio()
+  )+
+  "</radioGroup>"
 }
 
 void radio() :
 {}
 {
-  "<input type=\"radio\" id=\""< IDENTIFICADOR >"\" name=\""< IDENTIFICADOR >"\">"< IDENTIFICADOR >"</input>"
+  "<input type=\"radio\" id=\"" < IDENTIFICADOR > "\" name=\"" < IDENTIFICADOR > "\">" < IDENTIFICADOR > "</input>"
 }
 
 void select() :
 {}
 {
- "<select name = \"" < IDENTIFICADOR > "\">" (cuerpo())+ "</select>" 
+  "<select name = \"" < IDENTIFICADOR > "\">"
+  (
+    cuerpo()
+  )+
+  "</select>"
 }
 
 void cuerpo() :
@@ -119,22 +226,31 @@ void cuerpo() :
 void table() :
 {}
 {
-  "<table id=\"" <IDENTIFICADOR> "\">"(listaTR())*"</table>"
+  "<table id=\"" < IDENTIFICADOR > "\">"
+  (
+    listaTR()
+  )*
+  "</table>"
 }
 
-void listaTR():
+void listaTR() :
 {}
 {
-  "<tr>"(listaTD())*"</tr>"
+  "<tr>"
+  (
+    listaTD()
+  )*
+  "</tr>"
 }
-void listaTD():
+
+void listaTD() :
 {}
 {
-  "<td>"< IDENTIFICADOR >"</td>"
+  "<td>" < IDENTIFICADOR > "</td>"
 }
 
 void typeText() :
 {}
 {
-"<input type = \"text\" id =\"" < IDENTIFICADOR >"\" values = \"" < IDENTIFICADOR > "\"/>" 
+  "<input type = \"text\" id =\"" < IDENTIFICADOR > "\" values = \"" < IDENTIFICADOR > "\"/>"
 }
